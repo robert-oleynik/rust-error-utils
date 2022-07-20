@@ -25,7 +25,7 @@ impl Collection {
 		let ident = &self.ident;
 		let generics_lhs = self.generics.with_bounds();
 		let generics_rhs = self.generics.without_bounds();
-		let where_clause = self.generics.with_bounds();
+		let where_clause = self.generics.where_clause();
 		let impl_display_variants = self.variants.iter().map(|v| v.generate_display());
 		quote::quote!(
 			#( #impl_from_variants )*
