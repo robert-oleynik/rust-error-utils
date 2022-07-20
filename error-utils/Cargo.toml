@@ -1,0 +1,12 @@
+[package]
+name = "error-utils"
+version = "0.1.0"
+edition = "2021"
+
+[features]
+default = []
+derive = [ "error-utils-derive" ]
+
+[dependencies.error-utils-derive]
+path = "../error-utils-derive"
+optional = true
