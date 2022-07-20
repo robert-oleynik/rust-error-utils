@@ -1,0 +1,26 @@
+edition = "2021"
+max_width = 100
+hard_tabs = true
+tab_spaces = 4
+newline_style = "Unix"
+
+force_explicit_abi = true
+
+array_width = 80
+attr_fn_like_width = 80
+chain_width = 60
+fn_args_layout = "Tall"
+fn_call_width = 80
+match_arm_leading_pipes = "Never"
+match_block_trailing_comma = true
+merge_derives = true
+remove_nested_parens = true
+reorder_imports = true
+reorder_modules = true
+short_array_element_width_threshold = 10
+single_line_if_else_max_width = 0
+struct_lit_width = 0
+struct_variant_width = 35
+use_field_init_shorthand = true
+use_small_heuristics = "Off"
+use_try_shorthand = true
