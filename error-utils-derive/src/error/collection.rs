@@ -5,9 +5,12 @@
 use quote::__private::TokenStream;
 use syn::{Data, DeriveInput, Ident};
 
+use super::Generics;
+
 /// Derive macro implementation to combine multiple errors into one object.
 pub struct Collection {
 	ident: Ident,
+	generics: Generics,
 	variants: Vec<super::Variant>,
 }
 
@@ -18,7 +21,7 @@ impl Collection {
 			.variants
 			.iter()
 			.filter(|variant| variant.is_impl_from())
-			.map(|variant| variant.generate_from(&self.ident));
+			.map(|variant| variant.generate_from(&self.ident, &self.generics));
 		quote::quote!(
 			#( #impl_from_variants )*
 		)
@@ -41,6 +44,7 @@ impl From<DeriveInput> for Collection {
 
 		Self {
 			ident,
+			generics: Generics::from(raw.generics),
 			variants,
 		}
 	}

@@ -22,8 +22,10 @@ impl Variant {
 	///
 	/// # Parameter
 	/// - `ident` Identifier of parent enum.
-	pub fn generate_from(&self, ident: &Ident) -> TokenStream {
-		// TODO: Generics
+	pub fn generate_from(&self, ident: &Ident, generics: &super::Generics) -> TokenStream {
+		let generics_lhs = generics.with_bounds();
+		let generics_rhs = generics.without_bounds();
+		let where_clause = generics.where_clause();
 		let ty = match &self.fields {
 			Fields::Unnamed(fields) if fields.unnamed.len() == 1 => fields.unnamed.first().unwrap(),
 			Fields::Unnamed(_) => {
@@ -33,7 +35,7 @@ impl Variant {
 		};
 		let va_ident = &self.ident;
 		quote::quote!(
-			impl ::std::convert::From < #ty > for #ident {
+			impl #generics_lhs ::std::convert::From < #ty > for #ident #where_clause #generics_rhs {
 				fn from(e: #ty) -> Self {
 					Self :: #va_ident (e)
 				}
