@@ -2,7 +2,7 @@
 //
 // Copyright (c) 2022 Robert Oleynik
 
-use quote::__private::TokenStream;
+use quote::__private::{Span, TokenStream};
 use syn::*;
 
 pub struct Variant {
@@ -41,6 +41,38 @@ impl Variant {
 				}
 			}
 		)
+	}
+
+	/// Generate [`std::fmt::Display`] branch of [`super::ErrorCollection`].
+	pub fn generate_display(&self) -> TokenStream {
+		let ident = &self.ident;
+		if let Some(message) = &self.message {
+			match &self.fields {
+				Fields::Unit => quote::quote!(
+					Self :: #ident => f.write_str( #message )
+				),
+				Fields::Unnamed(fields) => {
+					let fields =
+						fields.unnamed.iter().enumerate().map(|(i, _)| {
+							Ident::new(format!("e{}", i).as_str(), Span::call_site())
+						});
+					let fields2 = fields.clone();
+					quote::quote!(
+						Self :: #ident ( #( #fields ),* ) => f.write_fmt( #message, #( #fields2 ),* )
+					)
+				},
+				Fields::Named(_) => todo!("Named fields are not supported yet"),
+			}
+		} else {
+			match &self.fields {
+				Fields::Unnamed(fields) if fields.unnamed.len() == 1 => quote::quote!(
+					Self :: #ident (e) => f.write_fmt("{}", e)
+				),
+				Fields::Named(_) => todo!("Named fields are not supported yet"),
+				Fields::Unnamed(_) => panic!("No error message set for {}", self.ident),
+				Fields::Unit => panic!("No error message set for {}", self.ident),
+			}
+		}
 	}
 }
 

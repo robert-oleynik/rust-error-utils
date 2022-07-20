@@ -22,8 +22,23 @@ impl Collection {
 			.iter()
 			.filter(|variant| variant.is_impl_from())
 			.map(|variant| variant.generate_from(&self.ident, &self.generics));
+		let ident = &self.ident;
+		let generics_lhs = self.generics.with_bounds();
+		let generics_rhs = self.generics.without_bounds();
+		let where_clause = self.generics.with_bounds();
+		let impl_display_variants = self.variants.iter().map(|v| v.generate_display());
 		quote::quote!(
 			#( #impl_from_variants )*
+
+			impl #generics_lhs ::std::fmt::Display for #ident #generics_rhs #where_clause {
+				fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result<()> {
+					match self {
+						#( #impl_display_variants ),*
+					}
+				}
+			}
+
+			impl #generics_lhs ::std::error::Error for #ident #generics_rhs #where_clause {}
 		)
 	}
 }
