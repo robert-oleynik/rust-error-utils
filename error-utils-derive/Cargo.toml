@@ -9,3 +9,8 @@ proc-macro = true
 bench = false
 
 [dependencies]
+quote = "~1.0.20"
+
+[dependencies.syn]
+version = "~1.0.98"
+features = ["extra-traits"]
