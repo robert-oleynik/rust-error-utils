@@ -10,5 +10,5 @@ mod error;
 #[proc_macro_derive(Errors, attributes(error))]
 pub fn derive_errors(item: TokenStream) -> TokenStream {
 	let item = syn::parse_macro_input!(item as DeriveInput);
-	error::Collection::from(item).parse().generate().into()
+	error::Collection::from(item).generate().into()
 }

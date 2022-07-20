@@ -2,6 +2,7 @@
 //
 // Copyright (c) 2022 Robert Oleynik
 
+use quote::__private::TokenStream;
 use syn::*;
 
 pub struct Variant {
@@ -9,6 +10,36 @@ pub struct Variant {
 	message: Option<LitStr>,
 	ident: Ident,
 	fields: Fields,
+}
+
+impl Variant {
+	/// Returns `true` if implementation of `From<...>` should be done for this variant.
+	pub fn is_impl_from(&self) -> bool {
+		self.impl_from
+	}
+
+	/// Generate `From` implementation for this variant.
+	///
+	/// # Parameter
+	/// - `ident` Identifier of parent enum.
+	pub fn generate_from(&self, ident: &Ident) -> TokenStream {
+		// TODO: Generics
+		let ty = match &self.fields {
+			Fields::Unnamed(fields) if fields.unnamed.len() == 1 => fields.unnamed.first().unwrap(),
+			Fields::Unnamed(_) => {
+				todo!("Only unnamed variants with 1 field support option `from`")
+			},
+			_ => unimplemented!("Only unnamed variants support option `from`"),
+		};
+		let va_ident = &self.ident;
+		quote::quote!(
+			impl ::std::convert::From < #ty > for #ident {
+				fn from(e: #ty) -> Self {
+					Self :: #va_ident (e)
+				}
+			}
+		)
+	}
 }
 
 impl From<syn::Variant> for Variant {

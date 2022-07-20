@@ -3,42 +3,45 @@
 // Copyright (c) 2022 Robert Oleynik
 
 use quote::__private::TokenStream;
-use syn::{Data, DeriveInput};
+use syn::{Data, DeriveInput, Ident};
 
 /// Derive macro implementation to combine multiple errors into one object.
 pub struct Collection {
-	raw: Option<DeriveInput>,
+	ident: Ident,
 	variants: Vec<super::Variant>,
 }
 
 impl Collection {
-	/// Parse [`DeriveInput`].
-	pub fn parse(self) -> Self {
-		let en = match self.raw.unwrap().data {
+	/// Generate [`TokenStream`] from parse input.
+	pub fn generate(self) -> TokenStream {
+		let impl_from_variants = self
+			.variants
+			.iter()
+			.filter(|variant| variant.is_impl_from())
+			.map(|variant| variant.generate_from(&self.ident));
+		quote::quote!(
+			#( #impl_from_variants )*
+		)
+	}
+}
+
+impl From<DeriveInput> for Collection {
+	fn from(raw: DeriveInput) -> Self {
+		let en = match raw.data {
 			Data::Enum(en) => en,
 			_ => panic!("Expected enum type"),
 		};
 
+		let ident = raw.ident;
 		let variants: Vec<_> = en
 			.variants
 			.into_iter()
 			.map(|variant| super::Variant::from(variant))
 			.collect();
 
-		todo!();
-	}
-
-	/// Generate [`TokenStream`] from parse input.
-	pub fn generate(self) -> TokenStream {
-		todo!()
-	}
-}
-
-impl From<DeriveInput> for Collection {
-	fn from(raw: DeriveInput) -> Self {
 		Self {
-			raw: Some(raw),
-			variants: Vec::new(),
+			ident,
+			variants,
 		}
 	}
 }
