@@ -31,7 +31,7 @@ impl Collection {
 			#( #impl_from_variants )*
 
 			impl #generics_lhs ::std::fmt::Display for #ident #generics_rhs #where_clause {
-				fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result<()> {
+				fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
 					match self {
 						#( #impl_display_variants ),*
 					}

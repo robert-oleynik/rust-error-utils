@@ -58,7 +58,7 @@ impl Variant {
 						});
 					let fields2 = fields.clone();
 					quote::quote!(
-						Self :: #ident ( #( #fields ),* ) => f.write_fmt( #message, #( #fields2 ),* )
+						Self :: #ident ( #( #fields ),* ) => f.write_fmt( format_args!( #message, #( #fields2 ),* ) )
 					)
 				},
 				Fields::Named(_) => todo!("Named fields are not supported yet"),
@@ -66,7 +66,7 @@ impl Variant {
 		} else {
 			match &self.fields {
 				Fields::Unnamed(fields) if fields.unnamed.len() == 1 => quote::quote!(
-					Self :: #ident (e) => f.write_fmt("{}", e)
+					Self :: #ident (e) => f.write_fmt( format_args! ( "{}", e ) )
 				),
 				Fields::Named(_) => todo!("Named fields are not supported yet"),
 				Fields::Unnamed(_) => panic!("No error message set for {}", self.ident),
