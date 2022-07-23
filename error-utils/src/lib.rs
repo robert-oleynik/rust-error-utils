@@ -2,6 +2,7 @@
 //
 // Copyright (c) 2022 Robert Oleynik
 
+mod fail;
 mod handle;
 
 #[cfg(feature = "derive")]

@@ -31,6 +31,16 @@ fn read_file<P: AsRef<Path>>(path: P) -> std::io::Result<()> {
 }
 ```
 
+### `fail` Macro
+
+Shorthand for `std::process::exit`
+
+```rust
+fail!();
+// or
+fail!(10);
+```
+
 ### `Errors` Derive Macro
 
 >

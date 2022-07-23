@@ -10,9 +10,7 @@
 ///
 /// ```rust
 /// handle_err!(/* Some expression */, None => /* Some handle */);
-///
 /// // Shorthand for
-///
 /// let result = match /* Some expression */ {
 ///		Some(result) => result,
 ///		None => /* Some handle */,
@@ -23,9 +21,7 @@
 ///
 /// ```rust
 /// handle_err!(/* Some expression */, err => /* Some handle */);
-///
 /// // Shorthand for
-///
 /// let result = match /* Some expression */ {
 ///		Ok(result) => result,
 ///		Err(err) => /* Some handle */,
