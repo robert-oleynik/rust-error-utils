@@ -1,0 +1,40 @@
+default:
+  image: rust:latest
+  tags:
+    - rust
+
+build:
+  stage: build
+  script:
+    - cargo build --features "derive" --examples
+  artifacts:
+    paths:
+      - target/
+    expire_in: '1 hrs'
+
+test 1/3:
+  stage: test
+  script:
+    - cargo test --features derive --tests
+  dependencies:
+    - build
+  needs:
+    - build
+
+test 2/3:
+  stage: test
+  script:
+    - cargo fmt --check
+  dependencies:
+    - build
+  needs:
+    - build
+
+test 3/3:
+  stage: test
+  script:
+    - cargo clippy
+  dependencies:
+    - build
+  needs:
+    - build
