@@ -3,7 +3,8 @@
 A collection of some rust macros to simplify common error handling patterns.
 
 1. [Usage](#usage)
-	1. [Errors Derive Macro](#errors-derive-macro)
+	1. [`handle_err` Macro](#handle_err-macro)
+	2. [`Errors` Derive Macro](#errors-derive-macro)
 2. [License](#license)
 
 ## Usage
@@ -14,7 +15,23 @@ Add to `Cargo.toml`:
 git = "https://gitlab.com/robert-oleynik/rust-error-utils.git"
 features = ["derive"]
 ```
-### Errors Derive Macro
+
+### `handle_err` Macro
+
+```rust
+use error_utils::handle_err;
+use std::path::Path;
+
+fn read_file<P: AsRef<Path>>(path: P) -> std::io::Result<()> {
+	let content = handle_err!(std::fs::read_string(path), err => {
+		eprintln!("{}", err);
+		return Err(err);
+	})
+	// ...
+}
+```
+
+### `Errors` Derive Macro
 
 >
 > This Macro requires the `derive` feature
