@@ -69,8 +69,7 @@ impl Variant {
 					Self :: #ident (e) => f.write_fmt( format_args! ( "{}", e ) )
 				),
 				Fields::Named(_) => todo!("Named fields are not supported"),
-				Fields::Unnamed(_) => panic!("No error message set for {}", self.ident),
-				Fields::Unit => panic!("No error message set for {}", self.ident),
+				_ => panic!("No error message set for {}", self.ident),
 			}
 		}
 	}
