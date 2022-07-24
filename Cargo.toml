@@ -3,3 +3,6 @@ members = [
 	"error-utils",
 	"error-utils-derive"
 ]
+
+[patch.crates-io]
+error-utils-derive = { path = "error-utils-derive" }
