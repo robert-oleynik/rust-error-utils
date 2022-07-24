@@ -51,11 +51,7 @@ impl From<DeriveInput> for Collection {
 		};
 
 		let ident = raw.ident;
-		let variants: Vec<_> = en
-			.variants
-			.into_iter()
-			.map(super::Variant::from)
-			.collect();
+		let variants: Vec<_> = en.variants.into_iter().map(super::Variant::from).collect();
 
 		Self {
 			ident,
