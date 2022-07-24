@@ -75,7 +75,7 @@ fn read_config<P: AsRef<Path>>(path: P) -> Result<toml::Value, ConfigError> {
 }
 ```
 
-See [Documentation](https://docs.rs/error-utils/latest/error_utils/macro.Errors.html)
+See [Documentation](https://docs.rs/error-utils/latest/error_utils/derive.Errors.html)
 
 ## License
 
