@@ -45,11 +45,7 @@ test 3/3:
 
 deploy:
   rules:
-    - if: $CI_COMMIT_REF_NAME == $CI_DEFAULT_BRANCH
-    - if: $CI_COMMIT_TAG == null
-      when: never
-    - if: $CI_COMMIT_TAG == ""
-      when: never
+    - if: $CI_COMMIT_TAG != ""
   stage: deploy
   script:
     - echo "Publish Tag '$CI_COMMIT_TAG'"
@@ -59,3 +55,5 @@ deploy:
     - build
   needs:
     - build
+  only:
+    - main
