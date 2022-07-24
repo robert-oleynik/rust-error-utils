@@ -7,7 +7,8 @@ A collection of some rust macros to simplify common error handling patterns.
 
 1. [Usage](#usage)
 	1. [`handle_err` Macro](#handle_err-macro)
-	2. [`Errors` Derive Macro](#errors-derive-macro)
+	2. [`fail` Macro](#fail-macro)
+	3. [`Errors` Derive Macro](#errors-derive-macro)
 2. [License](#license)
 
 ## Usage
