@@ -30,3 +30,15 @@ fn custom_error() {
 	let e: Generic<i32> = Generic::CustomError;
 	assert_eq!(format!("{}", e), "custom error");
 }
+
+#[derive(Debug, Errors)]
+pub enum Error<A, B, C>
+where
+	A: std::error::Error,
+	B: std::error::Error,
+	C: std::error::Error,
+{
+	A(A),
+	B(B),
+	C(C),
+}

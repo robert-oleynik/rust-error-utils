@@ -1,6 +1,6 @@
 [package]
 name = "error-utils"
-version = "0.1.0"
+version = "0.1.1"
 edition = "2021"
 license = "MIT"
 description = "Some rust macros to simplify common error handling patterns"
@@ -15,7 +15,7 @@ default = []
 derive = [ "error-utils-derive" ]
 
 [dependencies.error-utils-derive]
-version = "0.1.0"
+version = "0.1.1"
 optional = true
 
 [dev-dependencies]

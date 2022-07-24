@@ -18,9 +18,9 @@ impl Generics {
 		if self.params.is_empty() {
 			return None;
 		}
-		let params = &self.params;
+		let params = self.params.iter();
 		Some(quote::quote!(
-			< #params >
+			< #( #params ),* >
 		))
 	}
 
@@ -38,7 +38,7 @@ impl Generics {
 			_ => param,
 		});
 		Some(quote::quote!(
-			< #( #params )* >
+			< #( #params ),* >
 		))
 	}
 
