@@ -54,7 +54,7 @@ impl From<DeriveInput> for Collection {
 		let variants: Vec<_> = en
 			.variants
 			.into_iter()
-			.map(|variant| super::Variant::from(variant))
+			.map(super::Variant::from)
 			.collect();
 
 		Self {

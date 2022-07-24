@@ -92,7 +92,7 @@ impl From<syn::Variant> for Variant {
 		{
 			match option {
 				NestedMeta::Lit(Lit::Str(lit)) => {
-					if let Some(_) = &message {
+					if message.is_some() {
 						panic!("Message already set for variant {}", variant.ident)
 					} else {
 						message = Some(lit)

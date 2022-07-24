@@ -15,7 +15,7 @@ impl Generics {
 	/// Generate generic parameter with bound. (e.g. `< A: Display, B: Debug >`). Returns `None` if
 	/// no generics exists.
 	pub fn with_bounds(&self) -> Option<TokenStream> {
-		if self.params.len() == 0 {
+		if self.params.is_empty() {
 			return None;
 		}
 		let params = &self.params;
@@ -27,7 +27,7 @@ impl Generics {
 	/// Generate generic parameter with bound. (e.g. `< A, B >`). Returns `None` if no generics
 	/// exists.
 	pub fn without_bounds(&self) -> Option<TokenStream> {
-		if self.params.len() == 0 {
+		if self.params.is_empty() {
 			return None;
 		}
 		let params = self.params.iter().cloned().map(|param| match param {

@@ -20,15 +20,15 @@ mod error;
 ///
 /// #[derive(Debug, Errors)]
 /// enum Error {
-///		#[error("Error 1")]
-///		Variant1,
-///		#[error("Error: {}")]
-///		Variant2(i32),
-///		// ...
+///     #[error("Error 1")]
+///     Variant1,
+///     #[error("Error: {}")]
+///     Variant2(i32),
+///     // ...
 /// }
 ///
-///	assert_eq!(format!("{}", Error::Variant1), "Error 1");
-///	assert_eq!(format!("{}", Error::Variant2(42)), "Error: 42");
+/// assert_eq!(format!("{}", Error::Variant1), "Error 1");
+/// assert_eq!(format!("{}", Error::Variant2(42)), "Error: 42");
 /// ```
 ///
 /// This will create an enum with name `Error` which implements the [`std::fmt::Display`] and
@@ -49,9 +49,9 @@ mod error;
 ///
 /// #[derive(Debug, Errors)]
 /// enum Error {
-///		// ...
-///		#[error("<message>")]
-///		UnitVariant
+///     // ...
+///     #[error("<message>")]
+///     UnitVariant
 /// }
 /// ```
 ///
@@ -65,9 +65,9 @@ mod error;
 ///
 /// #[derive(Debug, Errors)]
 /// enum Error {
-///		// ...
-///		#[error("<message with {}>")]
-///		UnnamedVariant(i32)
+///     // ...
+///     #[error("<message with {}>")]
+///     UnnamedVariant(i32)
 /// }
 /// ```
 ///
@@ -83,9 +83,9 @@ mod error;
 ///
 /// #[derive(Debug, Errors)]
 /// enum Error {
-///		// ...
-///		#[error("error message with multiple fields: (field 1: {}, field 2: {})")]
-///		UnnamedVariant(i32, f32)
+///     // ...
+///     #[error("error message with multiple fields: (field 1: {}, field 2: {})")]
+///     UnnamedVariant(i32, f32)
 /// }
 /// ```
 ///
@@ -104,15 +104,15 @@ mod error;
 ///
 /// #[derive(Debug, Errors)]
 /// enum Error {
-///		// ...
-///		#[error(from)]
-///		Io(std::io::Error)
+///     // ...
+///     #[error(from)]
+///     Io(std::io::Error)
 /// }
 ///
 /// fn read_file<P: AsRef<std::path::Path>>(path: P) -> Result<(), Error> {
-///		let _content = std::fs::read_to_string(path)?;
-///		// ...
-///		Ok(())
+///     let _content = std::fs::read_to_string(path)?;
+///     // ...
+///     Ok(())
 /// }
 /// ```
 ///
@@ -135,10 +135,10 @@ mod error;
 ///
 /// #[derive(Debug, Errors)]
 /// enum Error<T: std::fmt::Debug + std::fmt::Display> {
-///		#[error("{}", from)]
-///		E(T),
-///		#[error("Some other error")]
-///		Other
+///     #[error("{}", from)]
+///     E(T),
+///     #[error("Some other error")]
+///     Other
 /// }
 /// ```
 #[proc_macro_derive(Errors, attributes(error))]
