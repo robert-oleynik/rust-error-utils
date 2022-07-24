@@ -11,7 +11,7 @@ categories = [ "rust-patterns" ]
 
 
 [features]
-default = []
+default = [ "derive" ]
 derive = [ "error-utils-derive" ]
 
 [dependencies.error-utils-derive]

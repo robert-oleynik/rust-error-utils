@@ -17,7 +17,6 @@ Add to `Cargo.toml`:
 ```toml
 [dependencies.error-utils]
 git = "https://gitlab.com/robert-oleynik/rust-error-utils.git"
-features = ["derive"]
 ```
 
 ### `handle_err` Macro
@@ -35,7 +34,7 @@ fn read_file<P: AsRef<Path>>(path: P) -> std::io::Result<()> {
 }
 ```
 
-<!-- TODO: Link to documentation -->
+See [Documentation](https://docs.rs/error-utils/latest/error_utils/index.html)
 
 ### `fail` Macro
 
@@ -47,12 +46,12 @@ fail!();
 fail!(10);
 ```
 
-<!-- TODO: Link to documentation -->
+See [Documentation](https://docs.rs/error-utils/latest/error_utils/macro.fail.html)
 
 ### `Errors` Derive Macro
 
 >
-> This Macro requires the `derive` feature
+> This Macro requires the `derive` feature. (Enabled per default)
 >
 
 **Note:** This example uses the [`toml`](https://crates.io/crates/toml) crate.
@@ -76,7 +75,7 @@ fn read_config<P: AsRef<Path>>(path: P) -> Result<toml::Value, ConfigError> {
 }
 ```
 
-<!-- TODO: Link to documentation -->
+See [Documentation](https://docs.rs/error-utils/latest/error_utils/macro.Errors.html)
 
 ## License
 
