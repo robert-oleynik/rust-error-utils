@@ -52,6 +52,10 @@ deploy:
       when: never
   stage: deploy
   script:
-    - echo "Publish Tag $CI_COMMIT_TAG"
-    - cargo publish -p "error-utils-derive"
-    - cargo publish -p "error-utils"
+    - echo "Publish Tag '$CI_COMMIT_TAG'"
+    - cargo publish --dry-run -p "error-utils-derive"
+    - cargo publish --dry-run -p "error-utils"
+  dependencies:
+    - build
+  needs:
+    - build
