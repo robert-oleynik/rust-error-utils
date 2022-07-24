@@ -1,3 +1,6 @@
+[![pipeline status](https://gitlab.com/robert-oleynik/rust-error-utils/badges/main/pipeline.svg)](https://gitlab.com/robert-oleynik/rust-error-utils/-/commits/main)
+[![Latest Release](https://gitlab.com/robert-oleynik/rust-error-utils/-/badges/release.svg)](https://gitlab.com/robert-oleynik/rust-error-utils/-/releases)
+
 # rust-error-utils
 
 A collection of some rust macros to simplify common error handling patterns.
