@@ -44,6 +44,8 @@ test 3/3:
     - build
 
 deploy:
+  variables:
+    CARGO_REGISTRY_TOKEN: $CARGO_REGISTRY_TOKEN
   rules:
     - if: $CI_COMMIT_TAG == null
       when: never
@@ -54,7 +56,3 @@ deploy:
     - echo "Publish Tag '$CI_COMMIT_TAG'"
     - cargo publish -p "error-utils-derive"
     - cargo publish -p "error-utils"
-  dependencies:
-    - build
-  needs:
-    - build
