@@ -41,4 +41,14 @@ where
 	A(A),
 	B(B),
 	C(C),
+	#[error("IO Error: {}", from)]
+	Io(std::io::Error),
+}
+
+#[derive(Debug, Errors)]
+pub enum GenericWithFrom<A: std::error::Error, B: std::error::Error, C: std::error::Error> {
+	A(A),
+	#[error(from)]
+	B(B),
+	C(C),
 }
