@@ -35,7 +35,7 @@ impl Variant {
 		};
 		let va_ident = &self.ident;
 		quote::quote!(
-			impl #generics_lhs ::std::convert::From < #ty > for #ident #where_clause #generics_rhs {
+			impl #generics_lhs ::std::convert::From < #ty > for #ident #generics_rhs #where_clause {
 				fn from(e: #ty) -> Self {
 					Self :: #va_ident (e)
 				}
