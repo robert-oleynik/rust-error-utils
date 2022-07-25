@@ -6,7 +6,7 @@ default:
 build:
   stage: build
   script:
-    - cargo build --features "derive" --examples
+    - cargo build --examples
   artifacts:
     paths:
       - target/
@@ -15,7 +15,7 @@ build:
 test 1/3:
   stage: test
   script:
-    - cargo test --features derive --tests
+    - cargo test --tests
   dependencies:
     - build
   needs:
