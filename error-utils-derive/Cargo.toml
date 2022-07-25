@@ -1,6 +1,6 @@
 [package]
 name = "error-utils-derive"
-version = "0.1.2"
+version = "0.1.3"
 edition = "2021"
 license = "MIT"
 description = "Some rust proc-macros to simplify common error handling patterns"
